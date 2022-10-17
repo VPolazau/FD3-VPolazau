@@ -22,7 +22,7 @@ export default class ShopService {
       id: item.id,
       title: item.title,
       price: item.price,
-      imageUrl: item.images[1],
+      imageUrl: item.images[0],
       quantity: item.stock,
     }
   }

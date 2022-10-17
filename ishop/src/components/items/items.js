@@ -4,7 +4,6 @@ import Item from '../item'
 
 const Items = ({ service, arrId }) => {
   const newArrItems = arrId.map(id => <Item service={service} itemId={id} key={id} />)
-  console.log(newArrItems)
   return (
     <div className='items table'>
       <div className='row keys'>
