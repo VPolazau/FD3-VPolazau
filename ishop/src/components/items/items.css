@@ -1,0 +1,15 @@
+.items.table {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.items .row{
+  margin: 20px;
+  font-size: 25px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-bottom: 1px solid #000;
+}

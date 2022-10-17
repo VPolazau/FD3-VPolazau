@@ -1,0 +1,23 @@
+.item {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.item div{
+  width: 25%;
+  align-self: center;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.item .imageUrl{
+  height: 150px;
+}
+
+img {
+  display: block;
+  width: auto;
+  height: 100%
+}
