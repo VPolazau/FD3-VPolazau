@@ -25,7 +25,7 @@ export default class Item extends Component {
     return (
         <div className='item'>
             <div className='title'>{title}</div>
-            <div className='prise'>{price}</div>
+            <div className='prise'>{price}$</div>
             <div className='imageUrl'><img src={`${imageUrl}`} alt='image item' className='image' /></div>
             <div className='quantity'>{quantity}</div>
         </div>
