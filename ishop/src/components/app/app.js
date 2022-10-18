@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import './app.css'
+
 import ShopService from '../../service/shop-service'
 import ErrorBoundry from '../error-boundry/error-boundry'
 import Items from '../items'
+
+import './app.css'
 
 export default class App extends Component {
   state = {

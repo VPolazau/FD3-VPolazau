@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 import './item.css'
 
 export default class Item extends Component {
@@ -23,12 +24,14 @@ export default class Item extends Component {
   render() {
     const { title, price, imageUrl, quantity } = this.state
     return (
-        <div className='item'>
-            <div className='title'>{title}</div>
-            <div className='prise'>{price}$</div>
-            <div className='imageUrl'><img src={`${imageUrl}`} alt='image item' className='image' /></div>
-            <div className='quantity'>{quantity}</div>
+      <div className='item'>
+        <div className='title'>{title}</div>
+        <div className='prise'>{price}$</div>
+        <div className='imageUrl'>
+          <img src={`${imageUrl}`} alt='image item' className='image' />
         </div>
+        <div className='quantity'>{quantity}</div>
+      </div>
     )
   }
 }

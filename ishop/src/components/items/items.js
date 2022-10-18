@@ -1,6 +1,8 @@
 import React from 'react'
-import './items.css'
+
 import Item from '../item'
+
+import './items.css'
 
 const Items = ({ service, arrId }) => {
   const newArrItems = arrId.map(id => <Item service={service} itemId={id} key={id} />)
