@@ -9,17 +9,17 @@ import './app.css'
 export default class App extends Component {
   state = {
     service: new ShopService,
-    arrId: [],
+    idArr: [],
   }
 
   updateState = () => {
-    const arrId = []
+    const idArr = []
     const service = new ShopService()
     service.getAllProducts().then(res => {
       res.products.forEach(item => {
-        arrId.push(item.id)
+        idArr.push(item.id)
       })
-      this.setState({service, arrId})
+      this.setState({service, idArr})
     })
   }
 
@@ -28,10 +28,10 @@ export default class App extends Component {
   }
 
   render() {
-    const { service, arrId } = this.state
+    const { service, idArr } = this.state
     return (
       <ErrorBoundry>
-          <Items service={service} arrId={arrId} />
+          <Items service={service} idArr={idArr} />
       </ErrorBoundry>
     )
   }
