@@ -2,12 +2,12 @@ import React from 'react'
 
 import Item from '../item'
 
-import './items.css'
+import './item-list.css'
 
-const Items = ({items}) => {
+const ItemList = ({items}) => {
   const nodes = items.map(item => <Item body={item.body} itemId={item.id} key={item.id} />)
   return (
-    <div className='items table'>
+    <div className='item-list table'>
       <div className='row keys'>
         <div className='key'>Name</div>
         <div className='key'>Price</div>
@@ -20,4 +20,4 @@ const Items = ({items}) => {
   )
 }
 
-export default Items
+export default ItemList

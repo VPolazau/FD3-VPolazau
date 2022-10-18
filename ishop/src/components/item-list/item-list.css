@@ -1,10 +1,10 @@
-.items.table {
+.item-list.table {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.items .row{
+.item-list .row{
   margin: 20px;
   font-size: 25px;
   font-weight: bold;

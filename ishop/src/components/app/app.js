@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import ShopService from '../../service/shop-service'
 import ErrorBoundry from '../error-boundry/error-boundry'
-import Items from '../items'
+import ItemList from '../item-list'
 
 import './app.css'
 
@@ -55,7 +55,7 @@ export default class App extends Component {
     const { items } = this.state
     return (
       <ErrorBoundry>
-        <Items items={items} />
+        <ItemList items={items} />
       </ErrorBoundry>
     )
   }
