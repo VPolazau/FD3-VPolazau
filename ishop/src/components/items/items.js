@@ -4,8 +4,8 @@ import Item from '../item'
 
 import './items.css'
 
-const Items = ({ service, idArr }) => {
-  const newArrItems = idArr.map(id => <Item service={service} itemId={id} key={id} />)
+const Items = ({items}) => {
+  const nodes = items.map(item => <Item body={item.body} itemId={item.id} key={item.id} />)
   return (
     <div className='items table'>
       <div className='row keys'>
@@ -15,7 +15,7 @@ const Items = ({ service, idArr }) => {
         <div className='key'>Quantity</div>
       </div>
 
-      <div className='items list'>{newArrItems}</div>
+      <div className='items list'>{nodes}</div>
     </div>
   )
 }

@@ -7,31 +7,55 @@ import Items from '../items'
 import './app.css'
 
 export default class App extends Component {
+  service = new ShopService()
+
   state = {
-    service: new ShopService,
-    idArr: [],
+    items: [],
   }
 
-  updateState = () => {
-    const idArr = []
-    const service = new ShopService()
-    service.getAllProducts().then(res => {
-      res.products.forEach(item => {
-        idArr.push(item.id)
+  componentDidMount() {
+    this.updateItems()
+  }
+
+  updateItems = () => {
+    let buff = []
+    this.service.getAllProducts().then(res => {
+      
+      buff = res.products.map(item => {
+        return {
+          id: item.id,
+          body: {
+            title: item.title,
+            price: item.price,
+            imageUrl: item.images[0],
+            quantity: item.stock,
+          },
+        }
       })
-      this.setState({service, idArr})
+      // res.products.forEach(item => {
+      //   buff = [
+      //     ...buff,
+      //     {
+      //       id: item.id,
+      //       body: {
+      //         title: item.title,
+      //         price: item.price,
+      //         imageUrl: item.images[0],
+      //         quantity: item.stock,
+      //       },
+      //     },
+      //   ]
+      // })
+
+      this.setState({ items: buff })
     })
   }
 
-  componentDidMount(){
-    this.updateState()
-  }
-
   render() {
-    const { service, idArr } = this.state
+    const { items } = this.state
     return (
       <ErrorBoundry>
-          <Items service={service} idArr={idArr} />
+        <Items items={items} />
       </ErrorBoundry>
     )
   }
