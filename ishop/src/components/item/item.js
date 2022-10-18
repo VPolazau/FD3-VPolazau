@@ -1,9 +1,18 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import './item.css'
 
 const Item = ({ body }) => {
   const { title, price, imageUrl, quantity } = body
+
+  Item.propTypes = {
+    body: PropTypes.object.isRequired,
+    title: PropTypes.string,
+    price: PropTypes.number,
+    imageUrl: PropTypes.string,
+    quantity: PropTypes.number,
+  }
 
   return (
     <div className='item'>
