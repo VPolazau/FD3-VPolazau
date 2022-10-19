@@ -14,32 +14,16 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    this.updateItems()
-  }
-
-  updateItems = () => {
-    this.service.getAllProducts().then(res => {
-      res.products.forEach(item => {
-        const newItem = {
-          id: item.id,
-          body: {
-            title: item.title,
-            price: item.price,
-            imageUrl: item.images[0],
-            quantity: item.stock,
-          },
-        }
-        this.setState(({ items }) => {
-          return {
-            items: [...items, newItem]
-          }
-        })
+    this.service
+      .getAllProducts()
+      .then(items => {
+        this.setState({items})
       })
-    })
   }
 
   render() {
     const { items } = this.state
+    console.log(items)
     return (
       <ErrorBoundry>
         <ItemList items={items} />
