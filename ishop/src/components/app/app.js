@@ -23,7 +23,6 @@ export default class App extends Component {
 
   render() {
     const { items } = this.state
-    console.log(items)
     return (
       <ErrorBoundry>
         <ItemList items={items} />
