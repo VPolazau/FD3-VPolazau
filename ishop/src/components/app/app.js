@@ -18,11 +18,9 @@ export default class App extends Component {
   }
 
   updateItems = () => {
-    let buff = []
     this.service.getAllProducts().then(res => {
-      
-      buff = res.products.map(item => {
-        return {
+      res.products.forEach(item => {
+        const newItem = {
           id: item.id,
           body: {
             title: item.title,
@@ -31,23 +29,12 @@ export default class App extends Component {
             quantity: item.stock,
           },
         }
+        this.setState(({ items }) => {
+          return {
+            items: [...items, newItem]
+          }
+        })
       })
-      // res.products.forEach(item => {
-      //   buff = [
-      //     ...buff,
-      //     {
-      //       id: item.id,
-      //       body: {
-      //         title: item.title,
-      //         price: item.price,
-      //         imageUrl: item.images[0],
-      //         quantity: item.stock,
-      //       },
-      //     },
-      //   ]
-      // })
-
-      this.setState({ items: buff })
     })
   }
 
