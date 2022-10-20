@@ -16,12 +16,15 @@ const Item = ({ body }) => {
 
   return (
     <div className='item'>
-      <div className='title'>{title}</div>
-      <div className='prise'>{price}$</div>
       <div className='imageUrl'>
         <img src={`${imageUrl}`} alt='image item' className='image' />
       </div>
-      <div className='quantity'>{quantity}</div>
+      <div className='price info'>
+        <span className='with-discount'>{price}$</span>
+        <span className='without-discount'>{(price * 1.3).toFixed(0)}$</span> 
+      </div>
+      <div className='title info'>{title}</div>
+      <div className='quantity info'>stock: {quantity}</div>
     </div>
   )
 }
