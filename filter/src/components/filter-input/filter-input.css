@@ -1,0 +1,14 @@
+.filter-input{
+  display: flex;
+  justify-content: space-around;
+  width: 400px;
+}
+
+.input-text{
+  width:300px;
+}
+
+.check{
+  margin: 0px;
+}
+
