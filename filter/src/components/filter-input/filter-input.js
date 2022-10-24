@@ -2,19 +2,17 @@ import React, { Component } from 'react'
 import './filter-input.css'
 
 export default class FilterInput extends Component {
+
   onSearchChange = e => {
     const term = e.target.value
     this.props.onSearchChange(term.toLowerCase())
-  }
-
-  onResetChange = () => {
-    this.props.onResetChange()
   }
 
   render() {
     const {
       resetInfo: { checked, inputText },
       onCheckChange,
+      onResetChange,
     } = this.props
     return (
       <div className='filter-input'>
@@ -30,7 +28,7 @@ export default class FilterInput extends Component {
           onChange={this.onSearchChange}
           value={inputText}
         />
-        <button className='reset' onClick={this.onResetChange}>
+        <button className='reset' onClick={onResetChange}>
           сброс
         </button>
       </div>
@@ -58,7 +56,7 @@ export default class FilterInput extends Component {
 //         onChange={e => onSearchChange(e.target.value)}
 //         value={inputText}
 //       />
-//       <button className='reset' onClick={() => onResetChange()}>
+//       <button className='reset' onClick={onResetChange}>
 //         сброс
 //       </button>
 //     </div>
