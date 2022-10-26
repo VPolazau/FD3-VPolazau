@@ -5,3 +5,9 @@
   justify-content: center;
   align-items: center;
 }
+
+.app .output{
+  margin-top: 10px;
+  height: 60vh;
+  width: 400px;
+}

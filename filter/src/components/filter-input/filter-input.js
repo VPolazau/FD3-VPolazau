@@ -35,32 +35,3 @@ export default class FilterInput extends Component {
     )
   }
 }
-
-// const FilterInput = ({
-//   resetInfo: { checked, inputText },
-//   onSearchChange,
-//   onCheckChange,
-//   onResetChange,
-// }) => {
-//   return (
-//     <div className='filter-input'>
-//       <input
-//         type='checkbox'
-//         className='check'
-//         checked={checked}
-//         onChange={onCheckChange}
-//       />
-//       <input
-//         type='text'
-//         className='input-text'
-//         onChange={e => onSearchChange(e.target.value)}
-//         value={inputText}
-//       />
-//       <button className='reset' onClick={onResetChange}>
-//         сброс
-//       </button>
-//     </div>
-//   )
-// }
-
-// export default FilterInput

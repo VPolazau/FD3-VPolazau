@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import FilterInput from '../filter-input'
-import Output from '../output'
 import './app.css'
 
 export default class App extends Component {
@@ -32,7 +31,7 @@ export default class App extends Component {
   }
 
   reset = () => {
-    this.setState({term: '', check: false})
+    this.setState({ term: '', check: false })
   }
 
   search = (mas, term) => {
@@ -48,20 +47,24 @@ export default class App extends Component {
     return newMas.sort()
   }
 
-  render() {
+  visibleText = () => {
     const { mas, term, check } = this.state
+    const filteredMas = this.ABCfilter(this.search(mas, term), check)
+    return filteredMas.join('\n')
+  }
 
-    const visibleText = this.ABCfilter(this.search(mas, term), check)
+  render() {
+    const { term, check } = this.state
 
     return (
       <div className='app container'>
         <FilterInput
-          resetInfo={{checked: check, inputText: term}}
+          resetInfo={{ checked: check, inputText: term }}
           onSearchChange={this.onSearchChange}
           onCheckChange={this.onCheckChange}
           onResetChange={this.reset}
         />
-        <Output mas={visibleText} />
+        <textarea className='output' value={this.visibleText()} readOnly/>
       </div>
     )
   }
