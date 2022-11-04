@@ -39,10 +39,10 @@ export default class App extends Component {
     this.selectItem(id)
   }
 
-  selectItem = id => {
+  selectItem = (id) => {
     this.setState(({ items, lastSelected }) => {
       const idx = items.findIndex(el => el.id === id)
-      let newItemList = items
+      const newItemList = items.slice()
 
       const oldItem = items[idx]
       if (!oldItem) return
@@ -71,9 +71,19 @@ export default class App extends Component {
     })
   }
 
-  newItem() {
-    this.setState(({items})=>{
+  addNewItem = () => {
+    // this.setState(({ items }) => {})
+    console.log('new item')
+  }
 
+  onFormSave = (body, id) => {
+    this.setState(({items}) => {
+      const idx = items.findIndex(el => el.id === id)
+      const item = {id, body, selected: true}
+      const newItemList = items.slice()
+      
+      newItemList.splice(idx, 1, item)
+      return {items: newItemList}
     })
   }
 
@@ -85,7 +95,8 @@ export default class App extends Component {
           items={items}
           onItemDeleted={this.deleteItem}
           onItemSelected={this.selectItem}
-          onAddNewItem={this.newItem}
+          onAddNewItem={this.addNewItem}
+          onFormSave={this.onFormSave}
         />
       </ErrorBoundry>
     )

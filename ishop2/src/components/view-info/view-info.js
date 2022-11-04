@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import EditForm from '../edit-form/edit-form'
 import './view-info.css'
 
 export default class ViewInfo extends Component {
@@ -13,8 +14,8 @@ export default class ViewInfo extends Component {
     this.setState({ edit: true })
   }
 
-  view(body) {
-    const { title, imageUrl, brand, price, description, quantity } = body
+  view = body => {
+    const { title, imageUrl, price, quantity } = body
     return (
       <React.Fragment>
         <div className='imageUrl'>
@@ -22,9 +23,7 @@ export default class ViewInfo extends Component {
         </div>
         <div className='viewInfo'>
           <div className='view_title'>Title: {title}</div>
-          <div className='view_brand'>Brand: {brand}</div>
           <div className='view_price'>Price: {price}$</div>
-          <div className='view_description'>Description: {description}</div>
           <div className='view_quantity'>Stock: {quantity}</div>
         </div>
         <button className='edit' onClick={e => this.onEdit(e)}>
@@ -35,6 +34,8 @@ export default class ViewInfo extends Component {
   }
 
   render() {
-    return this.view(this.state.body)
+    const { onFormSave } = this.props
+    const { edit, body, id } = this.state
+    return edit ? <EditForm body={body} id={id} onFormSave={onFormSave} /> : this.view(body)
   }
 }

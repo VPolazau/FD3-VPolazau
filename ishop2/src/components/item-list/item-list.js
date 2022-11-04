@@ -4,7 +4,7 @@ import Item from '../item'
 
 import './item-list.css'
 
-const ItemList = ({ items, onItemDeleted, onItemSelected, onAddNewItem}) => {
+const ItemList = ({ items, onItemDeleted, onItemSelected, onAddNewItem, onFormSave}) => {
   const nodes = items.map(item => (
     <Item
       body={item.body}
@@ -13,6 +13,7 @@ const ItemList = ({ items, onItemDeleted, onItemSelected, onAddNewItem}) => {
       key={item.id}
       onItemSelected={onItemSelected}
       onItemDeleted={onItemDeleted}
+      onFormSave={onFormSave}
     />
   ))
   return (
