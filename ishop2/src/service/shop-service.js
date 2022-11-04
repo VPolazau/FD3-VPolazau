@@ -22,9 +22,11 @@ export default class ShopService {
       body: {
         title: product.title,
         price: product.price,
+        discountPercentage: 1+product.discountPercentage/100,
         imageUrl: product.images[0],
         quantity: product.stock,
-        selected: false,
+        description: product.description,
+        brand: product.brand,
       },
     }
   }
