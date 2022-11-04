@@ -12,7 +12,7 @@
 }
 
 .item.selected {
-  outline: 4px solid rgb(37, 0, 183);
+  /* outline: 4px solid rgb(37, 0, 183); */
   grid-template-rows: 1fr 6fr 6fr 1fr;
   height: 55vh;
   width: 50vh;
