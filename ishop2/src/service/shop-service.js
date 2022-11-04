@@ -25,8 +25,6 @@ export default class ShopService {
         discountPercentage: 1+product.discountPercentage/100,
         imageUrl: product.images[0],
         quantity: product.stock,
-        description: product.description,
-        brand: product.brand,
       },
     }
   }
