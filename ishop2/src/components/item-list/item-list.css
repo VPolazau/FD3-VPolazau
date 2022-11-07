@@ -23,22 +23,13 @@
 }
 
 .item-list .container {
+  margin-top: 2px;
   border-top: 1px solid #000;
   padding-top: 18px;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: flex-start;
-}
-
-.item-list .div__btn{
-  display: flex;
-  justify-content: start;
-  margin: 5px 2px;
-}
-
-.item-list .btn-new {
-  font-size: larger;
 }
 
 @media screen and (max-width: 900px) {
