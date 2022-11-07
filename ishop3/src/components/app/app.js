@@ -24,23 +24,25 @@ export default class App extends Component {
     this.setState(({ items }) => {
       const idx = items.findIndex(el => el.id === id)
 
-      const newArray = [...items.slice(0, idx), ...items.slice(idx + 1)]
+      // const newArray = [...items.slice(0, idx), ...items.slice(idx + 1)]
+      const newArray = items.slice()
+      newArray.splice(idx, 1)
 
       let question = window.confirm(`Do you want to remove ${items[idx].body.title} ?`)
 
-      if(!question) {
+      if (!question) {
         return
       }
       return { items: newArray }
     })
-    // Чтобы не выделялся после выбора "не удалять"
+
     this.selectItem(id)
   }
 
-  selectItem = id => {
+  selectItem = (id) => {
     this.setState(({ items, lastSelected }) => {
       const idx = items.findIndex(el => el.id === id)
-      let newItemList = items
+      const newItemList = items.slice()
 
       const oldItem = items[idx]
       if (!oldItem) return
@@ -49,24 +51,39 @@ export default class App extends Component {
         const lastSelectedIdx = items.findIndex(el => el.id === lastSelected.id)
         const lastSelectedItem = {
           ...lastSelected,
-          body: { ...lastSelected.body, selected: false },
+          selected: false,
         }
-        newItemList = [
-          ...items.slice(0, lastSelectedIdx),
-          lastSelectedItem,
-          ...items.slice(lastSelectedIdx + 1),
-        ]
+
+        newItemList.splice(lastSelectedIdx, 1, lastSelectedItem)
       }
 
       const newItem = {
         ...oldItem,
-        body: { ...oldItem.body, selected: !oldItem.body.selected },
+        selected: !oldItem.selected,
       }
 
+      newItemList.splice(idx, 1, newItem)
+
       return {
-        items: [...newItemList.slice(0, idx), newItem, ...newItemList.slice(idx + 1)],
+        items: newItemList,
         lastSelected: newItem,
       }
+    })
+  }
+
+  addNewItem = () => {
+    // this.setState(({ items }) => {})
+    console.log('new item')
+  }
+
+  onFormSave = (body, id) => {
+    this.setState(({items}) => {
+      const idx = items.findIndex(el => el.id === id)
+      const item = {id, body, selected: true}
+      const newItemList = items.slice()
+      
+      newItemList.splice(idx, 1, item)
+      return {items: newItemList}
     })
   }
 
@@ -78,6 +95,8 @@ export default class App extends Component {
           items={items}
           onItemDeleted={this.deleteItem}
           onItemSelected={this.selectItem}
+          onAddNewItem={this.addNewItem}
+          onFormSave={this.onFormSave}
         />
       </ErrorBoundry>
     )
