@@ -1,23 +1,38 @@
-.edit_info{
+.edit-form {
+  height: 30vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
 }
 
-.edit_info .edit_input{
-  margin-bottom: 15px;
-}
-
-.buttons_edit{
+.edit-form .edit_info {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
 }
 
-.form-btns{
-  margin: 0px 20px;
+.edit-form .edit_info .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0px 4px;
 }
 
-.ban{
+.edit-form .edit_info .inputs {
+  margin: 0px 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-form .edit_info .errors {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+.edit-form .ban {
   color: red;
+}
+
+.edit-form .save.btn {
+  margin: 0px 4px;
 }

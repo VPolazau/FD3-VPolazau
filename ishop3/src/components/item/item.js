@@ -1,24 +1,44 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import './item.css'
-import ViewInfo from '../view-info'
 
 export default class Item extends Component {
+  state = {
+    body: this.props.body,
+  }
 
-  info = body => {
-    let { title, imageUrl, price, quantity, discountPercentage } = body
+  onEdit = (e, id) => {
+    e.stopPropagation()
+    return this.props.onEdit(id)
+  }
+
+  disabled = () => {
+    return this.props.blockItems ? 'disabled' : ''
+  }
+
+  render() {
+    const { itemId, onItemSelected, onItemDeleted, selected, blockItems } = this.props
+    const { title, imageUrl, price, quantity, discountPercentage } = this.state.body
+
     if (!discountPercentage) discountPercentage = 1.1
-  
-    Item.propTypes = {
-      title: PropTypes.string,
-      price: PropTypes.number,
-      imageUrl: PropTypes.string,
-      quantity: PropTypes.number,
-      discountPercentage: PropTypes.number,
+
+    let classItem = 'item'
+
+    if (selected && !blockItems) {
+      classItem += ' selected'
     }
+
     return (
-      <React.Fragment>
+      <div className={classItem} onClick={() => onItemSelected(itemId)}>
+        <button
+          type='button'
+          aria-label='Close'
+          className='btn del'
+          onClick={() => onItemDeleted(itemId)}
+          disabled={this.disabled()}
+        >
+          <span aria-hidden='true'>×</span>
+        </button>
         <div className='imageUrl'>
           <img src={`${imageUrl}`} alt='image item' className='image' />
         </div>
@@ -31,30 +51,16 @@ export default class Item extends Component {
         <div className='title info'>{title}</div>
         <div className='quantity info'>
           <div className='stock'>stock: {quantity}</div>
+          <div className='btn edit'>
+            <button
+              className='edit'
+              onClick={e => this.onEdit(e, itemId)}
+              disabled={this.disabled()}
+            >
+              Edit
+            </button>
+          </div>
         </div>
-      </React.Fragment>
-    )
-  }
-
-  render() {
-    const {body, itemId, selected, onItemSelected, onItemDeleted, onFormSave} = this.props
-    let classItem = 'item'
-
-    if (selected) classItem += ' selected'
-
-    const viewInfo = <ViewInfo body={body} id={itemId} onFormSave={onFormSave}/>
-
-    return (
-      <div className={classItem} onClick={() => onItemSelected(itemId)}>
-        <button
-          type='button'
-          aria-label='Close'
-          className='btn del'
-          onClick={() => onItemDeleted(itemId)}
-        >
-          <span aria-hidden='true'>×</span>
-        </button>
-        {selected ? viewInfo : this.info(body)}
       </div>
     )
   }

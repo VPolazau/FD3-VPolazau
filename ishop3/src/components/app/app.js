@@ -12,6 +12,8 @@ export default class App extends Component {
   state = {
     items: [],
     lastSelected: null,
+    blockItems: false,
+    clearItem: {},
   }
 
   componentDidMount() {
@@ -21,10 +23,10 @@ export default class App extends Component {
   }
 
   deleteItem = id => {
+    if (this.state.blockItems) return
     this.setState(({ items }) => {
       const idx = items.findIndex(el => el.id === id)
 
-      // const newArray = [...items.slice(0, idx), ...items.slice(idx + 1)]
       const newArray = items.slice()
       newArray.splice(idx, 1)
 
@@ -39,7 +41,8 @@ export default class App extends Component {
     this.selectItem(id)
   }
 
-  selectItem = (id) => {
+  selectItem = id => {
+    if (this.state.blockItems) return
     this.setState(({ items, lastSelected }) => {
       const idx = items.findIndex(el => el.id === id)
       const newItemList = items.slice()
@@ -59,7 +62,7 @@ export default class App extends Component {
 
       const newItem = {
         ...oldItem,
-        selected: !oldItem.selected,
+        selected: true,
       }
 
       newItemList.splice(idx, 1, newItem)
@@ -71,32 +74,85 @@ export default class App extends Component {
     })
   }
 
+  clearSelectedField = () => {
+    const { items, lastSelected } = this.state
+    const newItemList = items.slice()
+    if (!lastSelected) return
+    if (lastSelected) {
+      const lastSelectedIdx = items.findIndex(el => el.id === lastSelected.id)
+      const lastSelectedItem = {
+        body: lastSelected.body,
+        id: lastSelected.id,
+      }
+
+      newItemList.splice(lastSelectedIdx, 1, lastSelectedItem)
+
+      return { items: newItemList, lastSelected: lastSelectedItem }
+    }
+  }
+
   addNewItem = () => {
-    // this.setState(({ items }) => {})
-    console.log('new item')
+    this.setState(({ items }) => {
+      const clear = {
+        id: items[0].id - 2,
+        body: {
+          title: '',
+          price: '',
+          imageUrl: '',
+          quantity: '',
+          discountPercentage: 1,
+        },
+      }
+      return { clearItem: clear, blockItems: true }
+    })
+
+    this.clearSelectedField()
+    if (this.state.blockItems) return
+  }
+
+  onEdit = id => {
+    this.selectItem(id)
+  }
+
+  fildChanged = () => {
+    this.setState({ blockItems: true })
   }
 
   onFormSave = (body, id) => {
-    this.setState(({items}) => {
+    this.setState(({ items, clearItem }) => {
       const idx = items.findIndex(el => el.id === id)
-      const item = {id, body, selected: true}
+      const item = { id, body, selected: true }
       const newItemList = items.slice()
-      
+
+      if (clearItem.id === id) {
+        const newItem = { id, body }
+        newItemList.unshift(newItem)
+        this.selectItem(newItem.id)
+        return { items: newItemList, blockItems: false }
+      }
+
       newItemList.splice(idx, 1, item)
-      return {items: newItemList}
+      return { items: newItemList, blockItems: false, lastSelected: item }
     })
+    this.selectItem(this.state.items[0])
+    // остаётся выделенным прошлый item
   }
 
   render() {
-    const { items } = this.state
+    const { items, lastSelected, clearItem } = this.state
+
     return (
       <ErrorBoundry>
         <ItemList
           items={items}
+          newItem={clearItem}
+          selectedItem={lastSelected}
           onItemDeleted={this.deleteItem}
           onItemSelected={this.selectItem}
           onAddNewItem={this.addNewItem}
           onFormSave={this.onFormSave}
+          onEdit={this.onEdit}
+          fildChanged={this.fildChanged}
         />
       </ErrorBoundry>
     )

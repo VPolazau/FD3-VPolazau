@@ -1,5 +1,7 @@
-.selected .viewInfo {
+.viewInfo{
+  height: 30vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  align-items: flex-start;
 }
