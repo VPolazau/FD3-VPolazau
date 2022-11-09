@@ -13,7 +13,7 @@ export default class App extends Component {
     items: [],
     lastSelected: null,
     blockItems: false,
-    clearItem: {},
+    newItem: {},
   }
 
   componentDidMount() {
@@ -93,7 +93,7 @@ export default class App extends Component {
 
   addNewItem = () => {
     this.setState(({ items }) => {
-      const clear = {
+      const newItem = {
         id: items[0].id - 2,
         body: {
           title: '',
@@ -103,7 +103,7 @@ export default class App extends Component {
           discountPercentage: 1,
         },
       }
-      return { clearItem: clear, blockItems: true }
+      return { newItem: newItem, blockItems: true }
     })
 
     this.clearSelectedField()
@@ -119,12 +119,12 @@ export default class App extends Component {
   }
 
   onFormSave = (body, id) => {
-    this.setState(({ items, clearItem }) => {
+    this.setState(({ items, newItem }) => {
       const idx = items.findIndex(el => el.id === id)
       const item = { id, body, selected: true }
       const newItemList = items.slice()
 
-      if (clearItem.id === id) {
+      if (newItem.id === id) {
         const newItem = { id, body }
         newItemList.unshift(newItem)
         this.selectItem(newItem.id)
@@ -138,19 +138,24 @@ export default class App extends Component {
     // остаётся выделенным прошлый item
   }
 
+  onFormClose = () => {
+    this.setState({ blockItems: false, newItem: {} })
+  }
+
   render() {
-    const { items, lastSelected, clearItem } = this.state
+    const { items, lastSelected, newItem } = this.state
 
     return (
       <ErrorBoundry>
         <ItemList
           items={items}
-          newItem={clearItem}
+          newItem={newItem}
           selectedItem={lastSelected}
           onItemDeleted={this.deleteItem}
           onItemSelected={this.selectItem}
           onAddNewItem={this.addNewItem}
           onFormSave={this.onFormSave}
+          onFormClose={this.onFormClose}
           onEdit={this.onEdit}
           fildChanged={this.fildChanged}
         />

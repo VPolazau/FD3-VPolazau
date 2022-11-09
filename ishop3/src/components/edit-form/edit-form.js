@@ -27,8 +27,8 @@ export default class EditForm extends Component {
 
     const banImg = body.imageUrl.length ? '' : `${this.errorTxt} string!`
     const banTitle = body.title.length ? '' : `${this.errorTxt} string!`
-    const banPrice = isNaN(body.price) ? `${this.errorTxt} number!` : ''
-    const banQuantity = isNaN(body.quantity) ? `${this.errorTxt} number!` : ''
+    const banPrice = (body.price.length == 0 || isNaN(body.price)) ? `${this.errorTxt} number!` : ''
+    const banQuantity = (body.quantity.length == 0 || isNaN(body.quantity)) ? `${this.errorTxt} number!` : ''
 
     this.setState({ banImg, banTitle, banPrice, banQuantity })
     if (banImg.length || banTitle.length || banPrice.length || banQuantity.length) {
@@ -71,7 +71,7 @@ export default class EditForm extends Component {
   }
 
   render() {
-    const { onFormSave, id } = this.props
+    const { onFormSave, id, onFormClose } = this.props
     const { body, banImg, banTitle, banPrice, banQuantity, isNewItem } = this.state
     const { title, imageUrl, price, quantity } = body
     return (
@@ -125,7 +125,7 @@ export default class EditForm extends Component {
           >
             {isNewItem ? 'add' : 'save'}
           </button>
-          <button className='close btn'>close</button>
+          <button className='close btn' onClick={onFormClose}>close</button>
         </div>
       </div>
     )

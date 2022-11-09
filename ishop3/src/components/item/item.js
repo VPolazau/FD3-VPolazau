@@ -16,15 +16,22 @@ export default class Item extends Component {
     return this.props.blockItems ? 'disabled' : ''
   }
 
+  componentDidUpdate(oldProps, oldState) {
+    if (oldProps.body !== this.props.body) {
+      this.setState({ body: this.props.body })
+    }
+  }
+
   render() {
-    const { itemId, onItemSelected, onItemDeleted, selected, blockItems } = this.props
+    const { itemId, onItemSelected, onItemDeleted, selected, blockItems, isNewItem } =
+      this.props
     const { title, imageUrl, price, quantity, discountPercentage } = this.state.body
 
     if (!discountPercentage) discountPercentage = 1.1
 
     let classItem = 'item'
 
-    if (selected && !blockItems) {
+    if (selected && !isNewItem) {
       classItem += ' selected'
     }
 

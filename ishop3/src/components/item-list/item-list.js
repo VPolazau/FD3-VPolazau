@@ -26,6 +26,7 @@ export default class ItemList extends Component {
         onItemDeleted={onItemDeleted}
         onEdit={this.onEdit}
         blockItems={this.state.blockItems}
+        isNewItem={!!this.state.newItem.body}
       />
     ))
   }
@@ -57,8 +58,14 @@ export default class ItemList extends Component {
     this.setState({
       workMode: 1,
       blockItems: false,
+      newItem: {}
     })
     return this.props.onFormSave(body, id)
+  }
+
+  onFormClose = () => {
+    this.setState({ workMode: 1, blockItems: false })
+    return this.props.onFormClose()
   }
 
   onAddNewItem = () => {
@@ -95,6 +102,7 @@ export default class ItemList extends Component {
             onFormSave={this.onFormSave}
             fildChanged={this.fildChanged}
             isNewItem={false}
+            onFormClose={this.onFormClose}
           />
         )}
         {workMode === 3 && newItem.body && (
@@ -104,6 +112,7 @@ export default class ItemList extends Component {
             onFormSave={this.onFormSave}
             fildChanged={this.fildChanged}
             isNewItem={true}
+            onFormClose={this.onFormClose}
           />
         )}
         <div className='container'>{this.nodes()}</div>
