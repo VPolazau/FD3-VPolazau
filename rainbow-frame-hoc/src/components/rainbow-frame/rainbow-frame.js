@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-const withRainbowFrame = (colors) => (Wrapped) => {
+import './rainbow-frame.css'
 
-  wrapperFn = (colors) => {
+export default class RainbowFrame extends Component {
+  state = {
+    colors: this.props.colors,
+  }
+
+  wrapperFn = colors => {
     if (colors.length == 1) {
       return (
         <div
@@ -22,9 +27,14 @@ const withRainbowFrame = (colors) => (Wrapped) => {
     )
   }
 
-  return (props) => {
-    return <Wrapped {...props}/>
+  componentDidUpdate(oldProps) {
+    const { colors } = this.props
+    if (oldProps.colors !== colors) this.setState({ colors })
+  }
+
+  render() {
+    const { colors } = this.state
+
+    return this.wrapperFn(colors)
   }
 }
-
-export default withRainbowFrame
