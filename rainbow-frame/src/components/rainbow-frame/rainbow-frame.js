@@ -7,10 +7,14 @@ export default class RainbowFrame extends Component {
     colors: this.props.colors,
   }
 
-  wrapperFn = (colors) => {
-    if(colors.length == 1) {
+  wrapperFn = colors => {
+    if (colors.length == 1) {
       return (
-        <div className='wrapper' key={colors[0]} style={{ border: 'solid 10px ' + colors[0] }}>
+        <div
+          className='wrapper'
+          key={colors[0]}
+          style={{ border: 'solid 10px ' + colors[0] }}
+        >
           {this.props.children}
         </div>
       )
@@ -21,6 +25,11 @@ export default class RainbowFrame extends Component {
         {this.wrapperFn(colors)}
       </div>
     )
+  }
+
+  componentDidUpdate(oldProps) {
+    const { colors } = this.props
+    if (oldProps.colors !== colors) this.setState({ colors })
   }
 
   render() {
