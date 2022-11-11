@@ -12,15 +12,11 @@ const App = () => {
 
   return (
     <div className='container'>
-      <DoubleButton caption1='однажды' caption2='пору' onPressed={num => alert(num)}>
+      <DoubleButton caption1='однажды' caption2='пору'>
         в студёную зимнюю
       </DoubleButton>
 
-      <FramedDoubleButton
-        caption1='я из лесу'
-        caption2='мороз'
-        cbPressed={num => alert(num)}
-      >
+      <FramedDoubleButton caption1='я из лесу' caption2='мороз'>
         вышел, был сильный
       </FramedDoubleButton>
     </div>
