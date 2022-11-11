@@ -1,3 +1,3 @@
-import withRainbowFrame from './withRainbowFrame'
+import { withRainbowFrame } from './withRainbowFrame'
 
-export default withRainbowFrame
+export { withRainbowFrame }
