@@ -1,0 +1,26 @@
+.item {
+  display: grid;
+  grid-template-columns: 15% 15% 15% 10% 10% 20% 15%;
+  padding: 10px 0px;
+  border-top: solid 1px rgb(178, 178, 178, 0.7);
+}
+
+.item button {
+  margin: 0px 10px;
+  text-align: center;
+}
+
+.item .status {
+  border-radius: 5px;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.item .status.blocked {
+  background-color: rgb(200 0 0);
+  color: white;
+}
+.item .status.active {
+  background-color: #00cd00;
+}

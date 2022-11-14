@@ -1,0 +1,32 @@
+.item-list {
+  margin: 10px 0px;
+  padding-top: 10px;
+  border-top: solid 1px rgb(178, 178, 178, 0.7);
+  width: 800px;
+}
+
+.item-list .table{
+  border-bottom: solid 1px rgb(178, 178, 178, 0.7);
+}
+
+.item-list .new_client{
+  margin-top: 20px;
+}
+
+.item-list .table .table_head {
+  display: grid;
+  grid-template-columns: 15% 15% 15% 10% 10% 20% 15%;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.item-list .table .table_head .s5,.s6,.s7{
+  text-align: center;
+}
+
+.item-list .table .items {
+  display: flex;
+  flex-direction: column;
+}
+
+

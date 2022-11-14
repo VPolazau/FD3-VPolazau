@@ -1,0 +1,8 @@
+.head-filters{
+  padding: 10px 0px;
+  border-bottom: solid 1px rgb(178, 178, 178, 0.7);
+}
+
+.head-filters button{
+  margin-right: 0px;
+}
