@@ -10,13 +10,15 @@ const App = () => {
 
   const FramedDoubleButton = withRainbowFrame(colors)(DoubleButton)
 
+  const onPressed = num => alert(num)
+
   return (
     <div className='container'>
-      <DoubleButton caption1='однажды' caption2='пору'>
+      <DoubleButton caption1='однажды' caption2='пору' onPressed={onPressed}>
         в студёную зимнюю
       </DoubleButton>
 
-      <FramedDoubleButton caption1='я из лесу' caption2='мороз'>
+      <FramedDoubleButton caption1='я из лесу' caption2='мороз' onPressed={onPressed}>
         вышел, был сильный
       </FramedDoubleButton>
     </div>
