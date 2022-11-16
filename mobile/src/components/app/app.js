@@ -7,10 +7,12 @@ import ItemList from '../item-list'
 import './app.css'
 
 const App = () => {
-  return <div className='container'>
-    <HeadFilters />
-    <ItemList clients={data.clients}/>
-  </div>
+  return (
+    <div className='container'>
+      <HeadFilters />
+      <ItemList clients={data.clients} />
+    </div>
+  )
 }
 
 export default App
