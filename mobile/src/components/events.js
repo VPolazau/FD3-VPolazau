@@ -1,5 +1,6 @@
 import {EventEmitter} from 'events' 
 
-const headEvents = new EventEmitter()
+const btnEvent = new EventEmitter()
 
-export {headEvents}
+
+export {btnEvent}

@@ -1,12 +1,12 @@
 import React from 'react'
-import { headEvents } from '../events'
+import { btnEvent } from '../events'
 
 import './head-filters.css'
 
 const HeadFilters = () => {
-  const onAll = () => headEvents.emit('onAll', 'All')
-  const onActive = () => headEvents.emit('onActive', 'Active')
-  const onBlocked = () => headEvents.emit('onBlocked', 'Blocked')
+  const onAll = () => btnEvent.emit('onAll', 'All')
+  const onActive = () => btnEvent.emit('onActive', 'Active')
+  const onBlocked = () => btnEvent.emit('onBlocked', 'Blocked')
 
   return (
     <div className='head-filters'>

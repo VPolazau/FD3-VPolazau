@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { headEvents } from '../events'
+import EditForm from '../edit-form/edit-form'
+import { btnEvent } from '../events'
 import Item from '../item/'
 
 import './item-list.css'
@@ -8,9 +9,17 @@ export default class ItemList extends Component {
   render() {
     const { clients } = this.props
 
-    // headEvents.addListener('onAll', text => console.log(text))
-    // headEvents.addListener('onActive', text => console.log(text))
-    // headEvents.addListener('onBlocked', text => console.log(text))
+    btnEvent.addListener('onAll', text => console.log(text))
+    btnEvent.addListener('onActive', text => console.log(text))
+    btnEvent.addListener('onBlocked', text => console.log(text))
+
+    btnEvent.addListener('onEdit', text => console.log(text))
+    btnEvent.addListener('onSave', text => console.log(text))
+    btnEvent.addListener('onDeleted', text => console.log(text))
+
+    btnEvent.addListener('onSaveNew', text => console.log(text))
+    btnEvent.addListener('onCloseNew', text => console.log(text))
+    btnEvent.addListener('newItem', text => console.log(text))
 
     return (
       <div className='item-list'>
@@ -30,7 +39,13 @@ export default class ItemList extends Component {
             })}
           </div>
         </div>
-        <button className='new_client'>Добавить клиента</button>
+        {/* <EditForm /> */}
+        <button
+          className='new_client'
+          onClick={() => btnEvent.emit('newItem', 'newItem')}
+        >
+          Добавить клиента
+        </button>
       </div>
     )
   }
