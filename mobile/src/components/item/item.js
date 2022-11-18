@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 import { btnEvent } from '../events'
 
 import './item.css'
@@ -30,7 +31,7 @@ export default class Item extends Component {
   }
   onDeleted = () => btnEvent.emit('onDeleted', this.props.itemInfo.id)
 
-  
+
 
   shouldComponentUpdate(oldProps, oldState) {
     return (

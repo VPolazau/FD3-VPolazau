@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import deepEqual from 'deep-equal'
+
 import EditForm from '../edit-form/edit-form'
 import { btnEvent } from '../events'
 import Item from '../item/'
@@ -14,7 +16,6 @@ export default class ItemList extends Component {
   }
 
   componentDidMount() {
-
     // filters
     btnEvent.addListener('onAll', () => {
       this.setState({ filteredClients: this.state.clients })
@@ -68,7 +69,11 @@ export default class ItemList extends Component {
           patronymic,
           balance,
         }
-        return { addNewClient: false, clients: [...clients, newClient], newItemID: --newItemID}
+        return {
+          addNewClient: false,
+          clients: [...clients, newClient],
+          newItemID: --newItemID,
+        }
       })
     })
     btnEvent.addListener('onCloseNew', () => {
@@ -83,11 +88,7 @@ export default class ItemList extends Component {
   }
 
   shouldComponentUpdate(oldProps, oldState) {
-    return (
-      oldState.filteredClients !== this.state.filteredClients ||
-      oldState.clients !== this.state.clients ||
-      oldState.addNewClient !== this.state.addNewClient
-    )
+    return !(deepEqual(oldProps, this.props) && deepEqual(oldState, this.state))
   }
 
   render() {
