@@ -1,6 +1,8 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
 
+///////////////////////////////////////////////////////
+//подключение
 import {voteEvents} from './events';
 
 import './VotesAnswer.css';
