@@ -4,52 +4,52 @@ import { btnEvent } from '../events'
 
 import './edit-form.css'
 
-export default class EditForm extends Component {
-  setLastnameRef = React.createRef()
-  setNameRef = React.createRef()
-  setPatronymicRef = React.createRef()
-  setBalanceRef = React.createRef()
+const EditForm = () => {
+  const setLastnameRef = React.createRef()
+  const setNameRef = React.createRef()
+  const setPatronymicRef = React.createRef()
+  const setBalanceRef = React.createRef()
 
-  onSaveNew = () =>
+  const onSaveNew = () =>
     btnEvent.emit(
       'onSaveNew',
-      this.setLastnameRef.current.value,
-      this.setNameRef.current.value,
-      this.setPatronymicRef.current.value,
-      this.setBalanceRef.current.value
+      setLastnameRef.current.value,
+      setNameRef.current.value,
+      setPatronymicRef.current.value,
+      setBalanceRef.current.value
     )
-  onCloseNew = () => btnEvent.emit('onCloseNew', 'CloseNew')
 
-  render() {
-    return (
-      <div className='edit-form'>
-        <input
-          type='text'
-          className='lastname'
-          placeholder='lastname'
-          ref={this.setLastnameRef}
-        />
-        <input type='text' className='name' placeholder='name' ref={this.setNameRef} />
-        <input
-          type='text'
-          className='patronymic'
-          placeholder='patronymic'
-          ref={this.setPatronymicRef}
-        />
-        <input
-          type='text'
-          className='balance'
-          placeholder='balance'
-          ref={this.setBalanceRef}
-        />
-        <div className='status edit'>????</div>
-        <button className='saveNew' onClick={this.onSaveNew}>
-          Сохранить
-        </button>
-        <button className='closeNew' onClick={this.onCloseNew}>
-          Закрыть
-        </button>
-      </div>
-    )
-  }
+  const onCloseNew = () => btnEvent.emit('onCloseNew', 'CloseNew')
+  return (
+    <div className='edit-form'>
+      <input
+        type='text'
+        className='lastname'
+        placeholder='lastname'
+        ref={setLastnameRef}
+      />
+      <input type='text' className='name' placeholder='name' ref={setNameRef} />
+      <input
+        type='text'
+        className='patronymic'
+        placeholder='patronymic'
+        ref={setPatronymicRef}
+      />
+      <input
+        type='text'
+        className='balance'
+        placeholder='balance'
+        ref={setBalanceRef}
+      />
+      <div className='status edit'>????</div>
+      <button className='saveNew' onClick={onSaveNew}>
+        Сохранить
+      </button>
+      <button className='closeNew' onClick={onCloseNew}>
+        Закрыть
+      </button>
+    </div>
+  )
 }
+
+export default EditForm
