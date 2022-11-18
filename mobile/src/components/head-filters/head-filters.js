@@ -4,9 +4,9 @@ import { btnEvent } from '../events'
 import './head-filters.css'
 
 const HeadFilters = () => {
-  const onAll = () => btnEvent.emit('onAll', 'All')
-  const onActive = () => btnEvent.emit('onActive', 'Active')
-  const onBlocked = () => btnEvent.emit('onBlocked', 'Blocked')
+  const onAll = () => btnEvent.emit('onAll')
+  const onActive = () => btnEvent.emit('onActive')
+  const onBlocked = () => btnEvent.emit('onBlocked')
 
   return (
     <div className='head-filters'>

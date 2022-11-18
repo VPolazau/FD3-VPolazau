@@ -6,20 +6,93 @@ import Item from '../item/'
 import './item-list.css'
 
 export default class ItemList extends Component {
+  state = {
+    clients: this.props.clients,
+    filteredClients: this.props.clients,
+    addNewClient: false,
+    newItemID: 0,
+  }
+
+  componentDidMount() {
+
+    // filters
+    btnEvent.addListener('onAll', () => {
+      this.setState({ filteredClients: this.state.clients })
+    })
+    btnEvent.addListener('onActive', () => {
+      this.setState({
+        filteredClients: this.state.clients.filter(client => client.balance > 0),
+      })
+    })
+    btnEvent.addListener('onBlocked', () => {
+      this.setState({
+        filteredClients: this.state.clients.filter(client => client.balance < 0),
+      })
+    })
+
+    // change item
+    btnEvent.addListener('onSave', (id, newLastname, newBalance) => {
+      this.setState(({ clients }) => {
+        const idx = clients.findIndex(el => el.id === id)
+        let oldclients = clients
+        clients = [
+          ...clients.slice(0, idx),
+          { ...clients[idx], lastname: newLastname, balance: +newBalance },
+          ...clients.slice(idx + 1, clients.length),
+        ]
+        return { clients: clients }
+      })
+    })
+
+    btnEvent.addListener('onClose', () => {})
+
+    btnEvent.addListener('onDeleted', id => {
+      this.setState(({ clients }) => {
+        const idx = clients.findIndex(el => el.id === id)
+        let newClients = clients.slice()
+        newClients.splice(idx, 1)
+        return { clients: newClients }
+      })
+    })
+
+    // new item
+    btnEvent.addListener('newItem', () => {
+      this.setState({ addNewClient: true })
+    })
+    btnEvent.addListener('onSaveNew', (lastname, name, patronymic, balance) => {
+      this.setState(({ clients, newItemID }) => {
+        const newClient = {
+          id: newItemID,
+          lastname,
+          name,
+          patronymic,
+          balance,
+        }
+        return { addNewClient: false, clients: [...clients, newClient], newItemID: --newItemID}
+      })
+    })
+    btnEvent.addListener('onCloseNew', () => {
+      this.setState({ addNewClient: false })
+    })
+  }
+
+  componentDidUpdate(oldProps, oldState) {
+    if (oldState.clients !== this.state.clients) {
+      this.setState({ filteredClients: this.state.clients })
+    }
+  }
+
+  shouldComponentUpdate(oldProps, oldState) {
+    return (
+      oldState.filteredClients !== this.state.filteredClients ||
+      oldState.clients !== this.state.clients ||
+      oldState.addNewClient !== this.state.addNewClient
+    )
+  }
+
   render() {
-    const { clients } = this.props
-
-    btnEvent.addListener('onAll', text => console.log(text))
-    btnEvent.addListener('onActive', text => console.log(text))
-    btnEvent.addListener('onBlocked', text => console.log(text))
-
-    btnEvent.addListener('onEdit', text => console.log(text))
-    btnEvent.addListener('onSave', text => console.log(text))
-    btnEvent.addListener('onDeleted', text => console.log(text))
-
-    btnEvent.addListener('onSaveNew', text => console.log(text))
-    btnEvent.addListener('onCloseNew', text => console.log(text))
-    btnEvent.addListener('newItem', text => console.log(text))
+    console.log('render ItemList')
+    const { filteredClients, addNewClient } = this.state
 
     return (
       <div className='item-list'>
@@ -34,12 +107,12 @@ export default class ItemList extends Component {
             <span className='s7'>Удалить</span>
           </div>
           <div className='items'>
-            {clients.map(itemInfo => {
+            {filteredClients.map(itemInfo => {
               return <Item key={itemInfo.id} itemInfo={itemInfo} />
             })}
           </div>
         </div>
-        {/* <EditForm /> */}
+        {addNewClient ? <EditForm /> : null}
         <button
           className='new_client'
           onClick={() => btnEvent.emit('newItem', 'newItem')}
