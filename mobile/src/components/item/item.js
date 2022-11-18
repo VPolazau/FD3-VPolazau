@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
 import { btnEvent } from '../events'
 
 import './item.css'
 
-export default class Item extends Component {
+export default class Item extends PureComponent {
   state = {
     edited: false,
   }
@@ -33,13 +33,13 @@ export default class Item extends Component {
 
 
 
-  shouldComponentUpdate(oldProps, oldState) {
-    return (
-      oldProps.itemInfo.lastname !== this.props.itemInfo.lastname ||
-      oldProps.itemInfo.balance !== this.props.itemInfo.balance ||
-      oldState.edited !== this.state.edited
-    )
-  }
+  // shouldComponentUpdate(oldProps, oldState) {
+  //   return (
+  //     oldProps.itemInfo.lastname !== this.props.itemInfo.lastname ||
+  //     oldProps.itemInfo.balance !== this.props.itemInfo.balance ||
+  //     oldState.edited !== this.state.edited
+  //   )
+  // }
 
   render() {
     const { itemInfo } = this.props

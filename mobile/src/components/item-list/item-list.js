@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import deepEqual from 'deep-equal'
 
 import EditForm from '../edit-form/edit-form'
@@ -7,7 +7,7 @@ import Item from '../item/'
 
 import './item-list.css'
 
-export default class ItemList extends Component {
+export default class ItemList extends PureComponent {
   state = {
     clients: this.props.clients,
     filteredClients: this.props.clients,
@@ -87,9 +87,9 @@ export default class ItemList extends Component {
     }
   }
 
-  shouldComponentUpdate(oldProps, oldState) {
-    return !(deepEqual(oldProps, this.props) && deepEqual(oldState, this.state))
-  }
+  // shouldComponentUpdate(oldProps, oldState) {
+  //   return !(deepEqual(oldProps, this.props) && deepEqual(oldState, this.state))
+  // }
 
   render() {
     console.log('render ItemList')
