@@ -96,7 +96,6 @@ export default class ItemList extends PureComponent {
     console.log('render ItemList')
     const { filteredClients, addNewClient } = this.state
 
-    // this.itemCreate()
     return (
       <div className='item-list'>
         <div className='table'>
