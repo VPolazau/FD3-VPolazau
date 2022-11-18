@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import deepEqual from 'deep-equal'
+import memoize from 'memoizee'
 
 import EditForm from '../edit-form/edit-form'
 import { btnEvent } from '../events'
@@ -95,6 +96,7 @@ export default class ItemList extends PureComponent {
     console.log('render ItemList')
     const { filteredClients, addNewClient } = this.state
 
+    // this.itemCreate()
     return (
       <div className='item-list'>
         <div className='table'>
@@ -108,9 +110,11 @@ export default class ItemList extends PureComponent {
             <span className='s7'>Удалить</span>
           </div>
           <div className='items'>
-            {filteredClients.map(itemInfo => {
-              return <Item key={itemInfo.id} itemInfo={itemInfo} />
-            })}
+            {filteredClients.map(
+              memoize(itemInfo => {
+                return <Item key={itemInfo.id} itemInfo={itemInfo} />
+              })
+            )}
           </div>
         </div>
         {addNewClient ? <EditForm /> : null}
