@@ -31,16 +31,6 @@ export default class Item extends PureComponent {
   }
   onDeleted = () => btnEvent.emit('onDeleted', this.props.itemInfo.id)
 
-
-
-  // shouldComponentUpdate(oldProps, oldState) {
-  //   return (
-  //     oldProps.itemInfo.lastname !== this.props.itemInfo.lastname ||
-  //     oldProps.itemInfo.balance !== this.props.itemInfo.balance ||
-  //     oldState.edited !== this.state.edited
-  //   )
-  // }
-
   render() {
     const { itemInfo } = this.props
     const { id, lastname, name, patronymic, balance } = itemInfo

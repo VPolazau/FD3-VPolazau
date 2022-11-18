@@ -35,13 +35,13 @@ export default class ItemList extends PureComponent {
     btnEvent.addListener('onSave', (id, newLastname, newBalance) => {
       this.setState(({ clients }) => {
         const idx = clients.findIndex(el => el.id === id)
-        let oldclients = clients
-        clients = [
+        let newClients = clients
+        newClients = [
           ...clients.slice(0, idx),
           { ...clients[idx], lastname: newLastname, balance: +newBalance },
           ...clients.slice(idx + 1, clients.length),
         ]
-        return { clients: clients }
+        return { clients: newClients }
       })
     })
 
