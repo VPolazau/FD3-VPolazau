@@ -63,7 +63,7 @@ export default class ItemList extends PureComponent {
     btnEvent.addListener('onSaveNew', (lastname, name, patronymic, balance) => {
       this.setState(({ clients, newItemID }) => {
         const newClient = {
-          id: newItemID,
+          id: --newItemID,
           lastname,
           name,
           patronymic,
@@ -72,7 +72,7 @@ export default class ItemList extends PureComponent {
         return {
           addNewClient: false,
           clients: [...clients, newClient],
-          newItemID: --newItemID,
+          newItemID,
         }
       })
     })
