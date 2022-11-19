@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import deepEqual from 'deep-equal'
 import memoize from 'memoizee'
 
@@ -8,7 +8,7 @@ import Item from '../item/'
 
 import './item-list.css'
 
-export default class ItemList extends PureComponent {
+export default class ItemList extends Component {
   state = {
     clients: this.props.clients,
     filteredClients: this.props.clients,
@@ -88,9 +88,9 @@ export default class ItemList extends PureComponent {
     }
   }
 
-  // shouldComponentUpdate(oldProps, oldState) {
-  //   return !(deepEqual(oldProps, this.props) && deepEqual(oldState, this.state))
-  // }
+  shouldComponentUpdate(oldProps, oldState) {
+    return !(deepEqual(oldProps, this.props) && deepEqual(oldState, this.state))
+  }
 
   render() {
     console.log('render ItemList')
