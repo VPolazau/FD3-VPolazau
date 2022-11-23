@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { eventBtn } from '../../events'
 
 import Controls from '../controls'
@@ -7,7 +7,7 @@ import List from '../list'
 import './filter.css'
 
 const Filter = () => {
-  const [words, setWords] = useState([
+  const words = [
     'california',
     'everything',
     'aboveboard',
@@ -18,22 +18,40 @@ const Filter = () => {
     'literature',
     'contraband',
     'appreciate',
-  ])
-  const [term, setTerm] = useState('')
-  const [checkbox, setCheckbox] = useState(false) 
+  ]
+  // const [term, setTerm] = useState('')
+  const [checkbox, setCheckbox] = useState(false)
+  const [filteredWords, setFilteredWords] = useState(words)
 
   useEffect(() => {
-    eventBtn.addListener('onCheckChanged', () => setCheckbox(!checkbox))
-  
+    console.log('filter Mount')
+    setCheckbox(checkbox => false)
+    eventBtn.addListener('onCheckChanged', () => {
+      setCheckbox(checkbox => !checkbox)
+    })
+
     return () => {
+      console.log('filter unMount')
       eventBtn.removeListener('onCheckChanged', () => setCheckbox(!checkbox))
     }
   }, [])
 
+  const onTermChange = (term) => {
+    const newWords = [...words]
+    setFilteredWords(() => {
+      return newWords.filter(line => {
+        return line.indexOf(term) > -1
+      })
+    })
+  }
+
+  const cbTermChanged = useCallback(onTermChange, [])
+
+  console.log(filteredWords)
   return (
     <div className='Filter'>
-      <Controls />
-      <List />
+      <Controls onTermChanged={cbTermChanged} />
+      <List filteredWords={filteredWords} />
     </div>
   )
 }
