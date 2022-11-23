@@ -2,16 +2,17 @@ import React, { useMemo } from 'react'
 
 import './list.css'
 
-const List = ({ filteredWords }) => {
+const List = ({ wordsArr }) => {
+  
   const memoizeedList = useMemo(() => {
     console.log('render List')
-    const words = filteredWords.join('\n')
+    const withWrap = wordsArr.join('\n')
     return (
       <div className='List'>
-        <textarea className='output List__output' value={words} readOnly />
+        <textarea className='output List__output' value={withWrap} readOnly />
       </div>
     )
-  }, [filteredWords])
+  }, [wordsArr])
 
   return memoizeedList
 }

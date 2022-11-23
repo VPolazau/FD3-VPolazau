@@ -3,8 +3,27 @@ import Filter from '../filter'
 
 import './app.css'
 
+export const WordsContext = React.createContext()
+
 const App = () => {
-  return <Filter />
+  const words = [
+    'california',
+    'everything',
+    'aboveboard',
+    'washington',
+    'basketball',
+    'weathering',
+    'characters',
+    'literature',
+    'contraband',
+    'appreciate',
+  ]
+
+  return (
+    <WordsContext.Provider value={words}>
+      <Filter />
+    </WordsContext.Provider>
+  )
 }
 
 export default App
