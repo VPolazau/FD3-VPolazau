@@ -10,9 +10,20 @@ const Filter = () => {
   const wordsContext = useContext(WordsContext)
   const [words, setWords] = useState(wordsContext)
 
+  const onCheckChange = () => {
+    console.log('checkChanged')
+  }
+  
+  const onReset = () => {
+    console.log('reset')
+  }
+
   return (
       <div className='Filter'>
-        <Controls />
+        <Controls 
+        onCheckChange={onCheckChange}
+        onReset={onReset}
+        />
         <List wordsArr={words}/>
       </div>
   )

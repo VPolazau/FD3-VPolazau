@@ -1,8 +1,16 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useRef } from 'react'
 
 import './controls.css'
 
-const Controls = () => {
+const Controls = ({ onCheckChange, onReset }) => {
+  const inputTextRef = useRef()
+  const inputCheckRef = useRef()
+
+  const onResetChange = () => {
+    inputTextRef.current.value = ''
+    inputCheckRef.current.checked = false
+    return onReset()
+  }
 
   const memoizeedControls = useMemo(() => {
     console.log('render Controls')
@@ -11,12 +19,17 @@ const Controls = () => {
         <input
           type='checkbox'
           className='checkbox Controls__checkbox'
+          ref={inputCheckRef}
+          onChange={onCheckChange}
         />
         <input
           type='text'
           className='input-text Controls__input-text'
+          ref={inputTextRef}
         />
-        <button className='reset'>сброс</button>
+        <button className='reset' onClick={onResetChange}>
+          сброс
+        </button>
       </div>
     )
   }, [])
