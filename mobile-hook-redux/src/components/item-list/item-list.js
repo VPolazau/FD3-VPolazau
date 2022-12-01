@@ -15,26 +15,15 @@ const ItemList = ({ dataClients }) => {
   useEffect(() => {
     // filters
     btnEvent.addListener('onAll', () => {
-      setClients(clients => {
-        setFilteredClients(() => {
-          return clients
-        })
-        return clients
-      })
+      setFilteredClients(clients)
     })
 
     btnEvent.addListener('onActive', () => {
-      setClients(clients => {
-        setFilteredClients(clients.filter(client => client.balance > 0))
-        return clients
-      })
+      setFilteredClients(clients.filter(client => client.balance > 0))
     })
 
     btnEvent.addListener('onBlocked', () => {
-      setClients(clients => {
-        setFilteredClients(clients.filter(client => client.balance < 0))
-        return clients
-      })
+      setFilteredClients(clients.filter(client => client.balance <= 0))
     })
 
     // change item
@@ -69,7 +58,7 @@ const ItemList = ({ dataClients }) => {
     btnEvent.addListener('onSaveNew', (lastname, name, patronymic, balance) => {
       setClients(clients => {
         const newClient = {
-          id: --newItemID,
+          id: newItemID,
           lastname,
           name,
           patronymic,
@@ -77,18 +66,21 @@ const ItemList = ({ dataClients }) => {
         }
         return [...clients, newClient]
       })
-      setNewItemID(newItemID)
+      setNewItemID(newItemID - 1)
       setAddNewClient(false)
     })
     btnEvent.addListener('onCloseNew', () => {
       setAddNewClient(false)
     })
-  }, [])
 
-  useEffect(() => {
     setFilteredClients(clients)
+
+    return () => {
+      btnEvent.removeAllListeners()
+    }
   }, [clients])
 
+  console.log(newItemID)
   return (
     <div className='item-list'>
       <div className='table'>
