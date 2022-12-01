@@ -13,6 +13,30 @@ const ItemList = ({ dataClients }) => {
   let [newItemID, setNewItemID] = useState(0)
 
   useEffect(() => {
+    // filters
+    btnEvent.addListener('onAll', () => {
+      setClients(clients => {
+        setFilteredClients(() => {
+          return clients
+        })
+        return clients
+      })
+    })
+
+    btnEvent.addListener('onActive', () => {
+      setClients(clients => {
+        setFilteredClients(clients.filter(client => client.balance > 0))
+        return clients
+      })
+    })
+
+    btnEvent.addListener('onBlocked', () => {
+      setClients(clients => {
+        setFilteredClients(clients.filter(client => client.balance < 0))
+        return clients
+      })
+    })
+
     // change item
     btnEvent.addListener('onSave', (id, newLastname, newBalance) => {
       setClients(clients => {
@@ -34,8 +58,6 @@ const ItemList = ({ dataClients }) => {
         const idx = clients.findIndex(el => el.id === id)
         let newClients = clients.slice()
         newClients.splice(idx, 1)
-        console.log(clients)
-        console.log(newClients)
         return newClients
       })
     })
@@ -45,7 +67,7 @@ const ItemList = ({ dataClients }) => {
       setAddNewClient(true)
     })
     btnEvent.addListener('onSaveNew', (lastname, name, patronymic, balance) => {
-      setClients(clients  => {
+      setClients(clients => {
         const newClient = {
           id: --newItemID,
           lastname,
@@ -64,19 +86,7 @@ const ItemList = ({ dataClients }) => {
   }, [])
 
   useEffect(() => {
-    // filters
-    btnEvent.addListener('onAll', () => {
-      setFilteredClients(clients)
-    })
-    btnEvent.addListener('onActive', () => {
-      setFilteredClients(clients.filter(client => client.balance > 0))
-    })
-    btnEvent.addListener('onBlocked', () => {
-      setFilteredClients(clients.filter(client => client.balance < 0))
-    })
-    
     setFilteredClients(clients)
-    
   }, [clients])
 
   return (
