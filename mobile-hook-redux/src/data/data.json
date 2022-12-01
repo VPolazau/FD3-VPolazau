@@ -1,0 +1,32 @@
+{
+  "clients": [
+    {
+      "id": 1,
+      "lastname": "Иванов",
+      "name": "Иван",
+      "patronymic": "Иванович",
+      "balance": 200
+    },
+    {
+      "id": 2,
+      "lastname": "Сидоров",
+      "name": "Сидор",
+      "patronymic": "Сидорович",
+      "balance": 250
+    },
+    {
+      "id": 3,
+      "lastname": "Петров",
+      "name": "Пётр",
+      "patronymic": "Петрович",
+      "balance": 180
+    },
+    {
+      "id": 4,
+      "lastname": "Григорьев",
+      "name": "Григорий",
+      "patronymic": "Григорьевич",
+      "balance": -220
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+.item {
+  display: grid;
+  grid-template-columns: 15% 15% 15% 10% 10% 20% 15%;
+  padding: 10px 0px;
+  border-top: solid 1px rgb(178, 178, 178, 0.7);
+}
+
+.item input.lastname{
+  width: 85%;
+}
+
+.item input.balance{
+  width: 60%;
+}
+
+.item button {
+  margin: 0px 10px;
+  text-align: center;
+}
+
+.item .status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.item .status.blocked {
+  background-color: rgb(200 0 0);
+  color: white;
+}
+.item .status.active {
+  background-color: #00cd00;
+}
+
+.item .status.edit{
+  letter-spacing: 4px;
+  background-color: #99cfff;
+}

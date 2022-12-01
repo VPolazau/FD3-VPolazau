@@ -1,0 +1,29 @@
+.edit-form{
+  display: grid;
+  grid-template-columns: 15% 15% 15% 10% 10% 20% 15%;
+  padding: 10px 0px;
+  border-bottom: solid 1px rgb(178, 178, 178, 0.7);
+}
+
+.edit-form input{
+  width: 85%;
+}
+
+.edit-form input.balance{
+  width: 60%;
+}
+
+.edit-form button {
+  margin: 0px 10px;
+  text-align: center;
+}
+
+.edit-form .status.edit{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  background-color: #99cfff;
+}
