@@ -13,7 +13,7 @@ const App = () => {
     <Provider store={store}>
       <div className='container'>
         <HeadFilters />
-        <ItemList dataClients={data.clients}/>
+        <ItemList />
       </div>
     </Provider>
   )
