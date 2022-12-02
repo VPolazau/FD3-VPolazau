@@ -1,71 +1,54 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
+import { deleteClient, saveClient, saveNewClient } from '../../redux/clientsSlice'
 import EditForm from '../edit-form/edit-form'
 import { btnEvent } from '../helpers/events'
 import Item from '../item/'
 
 import './item-list.css'
 
-const ItemList = ({ dataClients }) => {
-  const [clients, setClients] = useState(dataClients)
-  const [filteredClients, setFilteredClients] = useState(dataClients)
+const ItemList = () => {
+  const clients = useSelector(state => state.clients.dataClients)
+
+  const [filteredClients, setFilteredClients] = useState(clients)
   const [addNewClient, setAddNewClient] = useState(false)
   let [newItemID, setNewItemID] = useState(0)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     // filters
     btnEvent.addListener('onAll', () => {
       setFilteredClients(clients)
     })
-
     btnEvent.addListener('onActive', () => {
       setFilteredClients(clients.filter(client => client.balance > 0))
     })
-
     btnEvent.addListener('onBlocked', () => {
       setFilteredClients(clients.filter(client => client.balance <= 0))
     })
 
+
+
     // change item
     btnEvent.addListener('onSave', (id, newLastname, newBalance) => {
-      setClients(clients => {
-        const idx = clients.findIndex(el => el.id === id)
-        let newClients = clients.slice()
-        newClients = [
-          ...clients.slice(0, idx),
-          { ...clients[idx], lastname: newLastname, balance: +newBalance },
-          ...clients.slice(idx + 1, clients.length),
-        ]
-        return newClients
-      })
+      dispatch(saveClient({ id, newLastname, newBalance }))
     })
-
     btnEvent.addListener('onClose', () => {})
-
+    
     btnEvent.addListener('onDeleted', id => {
-      setClients(clients => {
-        const idx = clients.findIndex(el => el.id === id)
-        let newClients = clients.slice()
-        newClients.splice(idx, 1)
-        return newClients
-      })
+      dispatch(deleteClient(id))
     })
+
+
 
     // new item
     btnEvent.addListener('newItem', () => {
       setAddNewClient(true)
     })
     btnEvent.addListener('onSaveNew', (lastname, name, patronymic, balance) => {
-      setClients(clients => {
-        const newClient = {
-          id: newItemID,
-          lastname,
-          name,
-          patronymic,
-          balance,
-        }
-        return [...clients, newClient]
-      })
+      dispatch( saveNewClient({lastname, name, patronymic, balance, newItemID}) )
       setNewItemID(newItemID - 1)
       setAddNewClient(false)
     })
@@ -80,7 +63,6 @@ const ItemList = ({ dataClients }) => {
     }
   }, [clients])
 
-  console.log(newItemID)
   return (
     <div className='item-list'>
       <div className='table'>
