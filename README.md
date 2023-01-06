@@ -1,2 +1,2 @@
 # FD3-VPolazau
-## Pet-projects IT-Academy
+## Homework IT-Academy
